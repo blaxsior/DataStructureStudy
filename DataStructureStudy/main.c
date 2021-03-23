@@ -1,14 +1,22 @@
 #include <stdio.h>
-#include "selection_sort.h"
-#define Length(arr) (sizeof(arr)/ sizeof(arr[0])) // 배열에만 사용
+#include "CircularQueue.h"
+
 int main()
 {
-
-	int arr[] = { 51,4,11,8,5,3,6,97,43,17 };
-	selection_sort(arr, Length(arr));
+	delCQueue();// can't get
+	addCQueue((element) { .value = 1 });
+	addCQueue((element) { .value = 2 });
+	addCQueue((element) { .value = 3 });//circular queue is full!!
+	addCQueue((element) { .value = 4 });
 	
-	for (int i = 0; i < Length(arr); i++)
+	delCQueue();
+	delCQueue();
+
+	addCQueue((element) { .value = 5 });
+	addCQueue((element) { .value = 6 });
+
+	while (!isEmptyCQ())
 	{
-		printf("%d ", arr[i]);
-	}
+		printf("%d\n", delCQueue().value);
+	}//dequeue while Circular queue is not empty. 
 }
