@@ -1,5 +1,5 @@
 #include "Element.h"
-
+#include <stdio.h>
 #define MAX_SIZE 4
 
 element CirQueue[MAX_SIZE];
