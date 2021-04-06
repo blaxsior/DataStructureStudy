@@ -49,18 +49,6 @@ void Destruct_SList(SinglyLinkedList* list); //리스트내 모든 요소를 제거 + 헤드�
 void Print_SList(SinglyLinkedList* list);
 Node_O* Search_SList(SinglyLinkedList* list, element data); 
 
-
-
-//노드의 기본 값을 지정하고 새로 만들어진 노드를 반환한다.
-Node_O*  NodeInit(element item)
-{
-	Node_O* node = (Node_O*)malloc(sizeof(Node_O));
-	node->item = item;
-	node->next = NULL;
-	return node;
-}
-
-
 //리스트를 초기화한다. 길이, head, tail 등을 설정한다.
 void Init_SList(SinglyLinkedList* list)
 {

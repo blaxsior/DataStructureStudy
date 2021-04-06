@@ -20,3 +20,12 @@ typedef struct _node1
 //Node round trip
 
 typedef Node_O Node;
+
+//노드의 기본 값을 지정하고 새로 만들어진 노드를 반환한다.
+Node_O* NodeInit(element item)
+{
+	Node_O* node = (Node_O*)malloc(sizeof(Node_O));
+	node->item = item;
+	node->next = NULL;
+	return node;
+}
