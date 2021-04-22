@@ -9,7 +9,7 @@
 //차수(degree) : sub tree 의 개수
 //루트(root) : 최상위에 있는 노드.
 //리프(leaf, terminal) : 차수가 0 인 노드
-//인터널(internal) : 루트 노드와 리프 노드가 아닌 노드.
+//인터널(internal) : 리프 노드가 아닌 노드.
 
 //부모(parent) : D의 부모 노드
 //자식(children) : D를 부모 노드로 하는 노드들
