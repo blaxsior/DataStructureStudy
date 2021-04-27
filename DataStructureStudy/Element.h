@@ -1,15 +1,10 @@
+#include <stdlib.h>
 //typedef struct {
 //	int value;
 //}element;
 
-typedef tree_pointer element;
+typedef int element;
 
-typedef struct _node0
-{
-	element item;
-	struct _node0 * next;
-}Node_O;
-//Node one way
 
 typedef struct _node1
 {
@@ -19,10 +14,20 @@ typedef struct _node1
 }Node_R;
 //Node round trip
 
+typedef Node_R* Element;
+
+typedef struct _node0
+{
+	Element item;
+	struct _node0* next;
+}Node_O;
+//Node one way
+
+
 typedef Node_O Node;
 
 //단방향 노드의 기본 값을 지정하고 새로 만들어진 노드를 반환한다.
-Node_O* NodeInit(element item)
+Node_O* NodeInit(Element item)
 {
 	Node_O* node = (Node_O*)malloc(sizeof(Node_O));
 	node->item = item;

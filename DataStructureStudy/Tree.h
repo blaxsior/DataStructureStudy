@@ -187,3 +187,4 @@ int bt_equal(tree_pointer p1, tree_pointer p2)
 		return 0;	//둘중 하나만 null -> 반드시 다른 트리
 
 }
+

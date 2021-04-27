@@ -1,13 +1,17 @@
 #include "Element.h"
 #include <stdlib.h>
 
-#define MAX_SIZE 100
-
 typedef struct
 {
 	Node* front;
 	Node* rear;
 }Queue;
+
+void QueueInit(Queue* queue)
+{
+	queue->front = NULL;
+	queue->rear = NULL;
+}
 
 int isQueueEmpty(Queue* queue)
 {
@@ -15,25 +19,29 @@ int isQueueEmpty(Queue* queue)
 }
 
 //레거시 C 로는 작동 안됨.
-void AddQueue(Queue* queue, element item)
+void AddQueue(Queue* queue, Element item)
 {
 	if (queue->front == NULL)
 	{
-		queue->front = &(Node) { .item = item, .next = NULL };
+		queue->front = NodeInit(item);
 		queue->rear = queue->front;
+		return;
 	}
-	queue->rear->next = &(Node) { .item = item, .next = NULL };
-
+	queue->rear->next = NodeInit(item);
+	queue->rear = queue->rear->next;
 }
 
-element DelQueue(Queue* queue)
+Element DelQueue(Queue* queue)
 {
 	if (queue->front == NULL)
 	{
-		return (element) { .key = -1; }; //지금 상황에서는 NULL Element를 의미
+//		return (Element) { .key = -1 }; //지금 상황에서는 NULL Element를 의미
+		return NULL;
 	}
 
 	Node* delNode = queue->front;
-
 	queue->front = queue->front->next;
+	Element elem = delNode->item;
+	free(delNode);
+	return elem;
 }
