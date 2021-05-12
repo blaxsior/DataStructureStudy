@@ -230,3 +230,114 @@ void bfs(int v)
 //둘다 list : O(|V|+|E|), array : O(|V|^2)의 시간이 걸린다.
 //list ? 방문한 곳을 재방문하지는 않아도, 확인하기 때문에, edge의 수에 비례하는 시간이 걸리고, 각각의 vertex에 대해 check 들어가니까, |V| + |E|의 시간이 걸린다.
 //array : 리스트와는 달리, 방문 여부를 알기 위해서 배열 전체에 접근해야 한다. 따라서, 배열의 크기인 |V|^2 만큼 접근한다
+
+//Finding Connected Component
+//연결되어 있는 부분은 결국 dfs 쓰나 bfs 쓰나 반드시 지나가게 되므로, bfs 또는 dfs를 써서 확인 가능하다.
+
+void connect()
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (!visited[i]) {
+			dfs(i);
+			printf("\n");
+		}
+	}
+	//connected 되어있는 components 찾을 수 있음
+}
+
+//Spanning Tree
+//G의 모든 정점을 포함하는 트리
+//|V| = 4 이면, |E|는 최소 3개 필요.
+
+//DFS, BFS를 통해서 탐색중 사용된 간선을 추가한다.
+//(1) 깊이우선 신장 트리 : DFS로 찾는 spanning tree
+//(2) 너비우선 신장 트리 : BFS로 찾는 spanning tree
+//->graph search 한번 하면 찾을 수 있음.
+
+//MST(최소비용신장트리, minimum cost spanning tree)
+//간선의 가중치 합이 최소인 신장트리
+//
+//사용되는 알고리즘 -> Greedy algorithm : 매 순간마다 가장 좋다고 생각되는 것들을 선택하여 최종적인 해답에 도달한다.
+
+//kruskal 방식.
+//n개의 vertex 중, n-1개의 간선을 찾되, 사이클을 형성하지 않도록 순서대로 찾는다.
+//set을 사용하는 언어를 사용하면, 효울적으로 만들 수 있다( set은 O(1) )
+//
+//T = {}
+//While(|T| < n - 1 && |E| != NULL) {
+//E에서 최소 비용의 간선을 선택;
+//E에서 발견한 최소비용 간선(v.w) 삭제
+//if((v,w)가 T에서 사이클 형성 안하면)
+// (v,w)를 T에 추가한다.
+// }
+// if(|T| < n-1)
+//		spanning 트리 없다.
+//
+
+//O(|E|log|E|)의 복잡도를 가진다. (sorting에 |E|log|E| + 각 edge를 순환 |E| - 1)
+//Edge의 숫자에 영향을 받는다. 간선이 적으면 효율적인 알고리즘.
+
+//Prim 방식
+//루트노드에서 시작, 해당 노드에서 갈 수 있는 weight가 최소인 노드를 선택한다.
+//해당 트리에 대하여, 접근할 수 있는 값들 중에 비용이 최소인 노드를 구하고, 해당 노드를 트리에 추가하는 과정을 계속 반복한다.
+
+//T = {}
+//TV = {0} -> 정점 0에서 시작하겠다.
+//While(|T| < n - 1){
+//u는 TV에 속하고, v는 TV에 속하지 않는 최저비용 간선 (u,v)에 대하여,
+// if (간선 존재 안함)
+//	break
+//v를 TV추가, (u,v) T에 추가
+//}
+//if(|T| < n-1)
+//	spanning tree 존재 안함
+//
+
+
+//O(|V|^2)의 복잡도를 가진다
+//정점이 적을 수록 유리한 알고리즘이다.
+
+
+//단일 출발점/ 모든 도착지 찾기
+//Dikstra algorithm 다익스트라 알고리즘
+//found[i] = True : i까지의 최단경로를 발견 -> 집합 S, 최단 경로가 확인된 경로들을 추가한다,
+//i 번째 vertex까지 최단경로임이 확인되었다는 의미
+
+//distance[i] : 0 에서 S 내의 정점만을 거친 i의 최소거리
+
+//found[i] = false for all i
+//distance[i] = cost[0][i] for all i -> 0에서 i로 가는 경로를 처음에 설정해둔다!
+//found[0] = true -> 0번째 vertex부터 시작한다.
+
+//repeat
+//	found[u] = false && distance[u] is minimum -> 처음 접근한 점에 대하여 distance가 기존보다 minimum이면,
+//	found[u] = true(S에 u를 포함한다)
+// 모든u 에 인접한 w(found[w]= false) 에 대하여
+//	distance[w] = min(distance[w], distance[u]+cost[u][w]), 
+//  (S에 포함되지 않은 모든 점에 대하여 조정 들어간다.)
+
+//기본적인 복잡도
+// |V| * 2|V| = O(V^2)
+
+//인접 리스트 방식으로 수행 + priority queue(min heap)
+//모든 간선이 한번씩 갱신됨 : O(|E|)
+//최소 distance 정점 찾기: O(log|E|)
+// |E| * log|E| <= |E| * log|V|^2 = O(|E|log|V|)
+
+//All pair shortest path
+//모든 쌍의 최단 경로를 만든다
+//A-1 -> A0 -> A1 -> A2 -> ... -> An-1로 가는 거리를 업데이트
+//시작(A-1)에서부터 시작하여 (00) (01) .... (kk) 까지에 대하여
+//(00),(00)  ... (k0)(0k) 으로 가는 경로로 나타내고, 
+//(kk) 와 (k0) ~ (0k) 중 더 작은 값을 (kk) 에 대해 업데이트를 수행한다.
+//이런식으로 계속 구하면, 모든 경로에 대한 shortest path를 알 수 있다.
+
+#define N 10 // vertex의 개수
+
+int distance[N][N];
+
+void allCost(int n)
+{
+	for(int i=)
+}
