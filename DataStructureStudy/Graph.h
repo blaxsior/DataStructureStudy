@@ -332,12 +332,3 @@ void connect()
 //(00),(00)  ... (k0)(0k) 으로 가는 경로로 나타내고, 
 //(kk) 와 (k0) ~ (0k) 중 더 작은 값을 (kk) 에 대해 업데이트를 수행한다.
 //이런식으로 계속 구하면, 모든 경로에 대한 shortest path를 알 수 있다.
-
-#define N 10 // vertex의 개수
-
-int distance[N][N];
-
-void allCost(int n)
-{
-	for(int i=)
-}
