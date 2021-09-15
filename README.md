@@ -1,4 +1,2 @@
-# DataStructureStudy
-For DataStructure Study
-
-자료구조 공부를 위해 만든 공간입니다.
+<h1>자료구조 및 알고리즘 공부 with python</h1>
+<p>기존에 공부했던 자료구조 내용을 복습하고, 파이썬에 익숙해지기 위한 목적으로 만든 브랜치입니다.</p>
